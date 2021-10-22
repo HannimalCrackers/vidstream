@@ -6,12 +6,18 @@
   <button id="screenshot-button">Take Screenshot</button>
 </div>
 
+<form action="{{ url_for('handle_data') }}" method="post"  enctype=multipart/form-data>
+  <input style='display:none' type="text" name="demo" id="imagedata">
+  <input type="submit">
+</form>
+
 <script>
   //const captureVideoButton = document.querySelector(".capture-button");
   const screenshotButton = document.querySelector("#screenshot-button");
   const img = document.querySelector("#screenshot-img");
   const video = document.querySelector("#screenshot-video");
   const canvas = document.createElement("canvas");
+  const imageraw = document.querySelector("#imagedata");
 
   const constraints = {
     video: true,
@@ -33,7 +39,8 @@
     canvas.height = video.videoHeight;
     canvas.getContext("2d").drawImage(video, 0, 0);
     // Other browsers will fall back to image/png
-    img.src = canvas.toDataURL("image/webp");
+    img.src = canvas.toDataURL("image/png");
+    imageraw.value=canvas.toDataURL()
   };
 
   function handleSuccess(stream) {
