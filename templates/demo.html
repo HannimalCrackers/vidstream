@@ -1,55 +1,61 @@
-<video id='screenshot-video' autoplay></video>
-<img id="screenshot-img">
-<canvas style="display:none;"></canvas>
-<div>
-  <!--button class="capture-button">Capture Video</button-->
-  <button id="screenshot-button">Take Screenshot</button>
+<link href="static/styles.css" rel="stylesheet">
+<div style="background-image: url('static/background.png');">
+  <h1>Saturn Needs Your Flesh</h1>
+  <br>
+  <p>Just after midnight&nbsp;&nbsp;&nbsp;on Halloween&nbsp;&nbsp;&nbsp;Saturn&nbsp;&nbsp;&nbsp;disappears from the sky&nbsp;&nbsp;&nbsp;on a secret mission.<br>You must help to disguise it&nbsp;&nbsp;&nbsp;and&nbsp;&nbsp;&nbsp;become its secret agent.</p>
+  <p>Click the buttons below to send&nbsp;&nbsp;&nbsp;Saturn&nbsp;&nbsp;&nbsp;what it needs&nbsp;&nbsp;&nbsp;and begin&nbsp;&nbsp;&nbsp;your&nbsp;&nbsp;&nbsp;transformation...</p>
+
+  <video id='screenshot-video' autoplay VSPACE=30></video>
+  <img id="screenshot-img">
+  <canvas style="display:none;"></canvas>
+  <div>
+    <!--button class="capture-button">Capture Video</button-->
+    <button id="screenshot-button">Click to Take Screenshot</button>
 </div>
+  <form action="{{ url_for('handle_data') }}" method="post"  enctype=multipart/form-data>
+    <input style='display:none' type="text" name="demo" id="imagedata">
+    <input type="submit">
+  </form>
+</div>
+  <script>
+    //const captureVideoButton = document.querySelector(".capture-button");
+    const screenshotButton = document.querySelector("#screenshot-button");
+    const img = document.querySelector("#screenshot-img");
+    const video = document.querySelector("#screenshot-video");
+    const canvas = document.createElement("canvas");
+    const imageraw = document.querySelector("#imagedata");
 
-<form action="{{ url_for('handle_data') }}" method="post"  enctype=multipart/form-data>
-  <input style='display:none' type="text" name="demo" id="imagedata">
-  <input type="submit">
-</form>
+    const constraints = {
+      video: true,
+    };
 
-<script>
-  //const captureVideoButton = document.querySelector(".capture-button");
-  const screenshotButton = document.querySelector("#screenshot-button");
-  const img = document.querySelector("#screenshot-img");
-  const video = document.querySelector("#screenshot-video");
-  const canvas = document.createElement("canvas");
-  const imageraw = document.querySelector("#imagedata");
+    navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
+      video.srcObject = stream;
+    });
 
-  const constraints = {
-    video: true,
-  };
+    // captureVideoButton.onclick = function () {
+    //   navigator.mediaDevices
+    //     .getUserMedia(constraints)
+    //     .then(handleSuccess)
+    //     .catch(handleError);
+    // };
 
-  navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
-    video.srcObject = stream;
-  });
+    screenshotButton.onclick = video.onclick = function () {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext("2d").drawImage(video, 0, 0);
+      // Other browsers will fall back to image/png
+      img.src = canvas.toDataURL("image/png");
+      imageraw.value=canvas.toDataURL()
+    };
 
-  // captureVideoButton.onclick = function () {
-  //   navigator.mediaDevices
-  //     .getUserMedia(constraints)
-  //     .then(handleSuccess)
-  //     .catch(handleError);
-  // };
+    function handleSuccess(stream) {
+      screenshotButton.disabled = false;
+      video.srcObject = stream;
+    }
 
-  screenshotButton.onclick = video.onclick = function () {
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    canvas.getContext("2d").drawImage(video, 0, 0);
-    // Other browsers will fall back to image/png
-    img.src = canvas.toDataURL("image/png");
-    imageraw.value=canvas.toDataURL()
-  };
+    function handleError(error) {
+      console.error("Error: ", error);
+    }
 
-  function handleSuccess(stream) {
-    screenshotButton.disabled = false;
-    video.srcObject = stream;
-  }
-
-  function handleError(error) {
-    console.error("Error: ", error);
-  }
-
-</script>
+  </script>

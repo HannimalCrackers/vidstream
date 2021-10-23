@@ -3,7 +3,7 @@ from flask import render_template
 from flask import request
 import base64, numpy, os
 from skimage import data, io, filters
- 
+
 UPLOAD_FOLDER = '/pics'
 
 # creates a Flask application, named app
@@ -18,6 +18,7 @@ def hello():
 @app.route('/handle_data', methods=['POST'])
 def handle_data():
     image_b64 = request.form['demo'].split(',')[1]
+    print(image_b64)
     image_data = base64.b64decode(image_b64)
     with open("test.png", "wb") as fo:
        fo.write(image_data)
