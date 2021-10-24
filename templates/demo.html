@@ -1,22 +1,26 @@
 <link href="static/styles.css" rel="stylesheet">
-<div style="background-image: url('static/background.png');">
-  <h1>Saturn Needs Your Flesh</h1>
-  <br>
-  <p>Just after midnight&nbsp;&nbsp;&nbsp;on Halloween&nbsp;&nbsp;&nbsp;Saturn&nbsp;&nbsp;&nbsp;disappears from the sky&nbsp;&nbsp;&nbsp;on a secret mission.<br>You must help to disguise it&nbsp;&nbsp;&nbsp;and&nbsp;&nbsp;&nbsp;become its secret agent.</p>
-  <p>Click the buttons below to send&nbsp;&nbsp;&nbsp;Saturn&nbsp;&nbsp;&nbsp;what it needs&nbsp;&nbsp;&nbsp;and begin&nbsp;&nbsp;&nbsp;your&nbsp;&nbsp;&nbsp;transformation...</p>
 
-  <video id='screenshot-video' autoplay VSPACE=30></video>
-  <img id="screenshot-img">
-  <canvas style="display:none;"></canvas>
-  <div>
-    <!--button class="capture-button">Capture Video</button-->
-    <button id="screenshot-button">Click to Take Screenshot</button>
-</div>
-  <form action="{{ url_for('handle_data') }}" method="post"  enctype=multipart/form-data>
-    <input style='display:none' type="text" name="demo" id="imagedata">
-    <input type="submit">
-  </form>
-</div>
+<div style="background-image: url('static/background.png');">
+  <h1 style="margin-left:20px">Saturn Needs Your Skin</h1>
+  <br>
+
+
+
+  <p style="margin-left:20px"><a href="https://griffithobservatory.org/explore/observing-the-sky/sky-report/" target="_blank" class="egg">Just before&nbsp;&nbsp;midnight&nbsp;&nbsp;&nbsp;on Halloween</a>&nbsp;&nbsp;&nbsp;Saturn&nbsp;&nbsp;&nbsp;disappears from the sky&nbsp;&nbsp;on a secret mission.<br>
+    You will disguise it&nbsp;&nbsp;with your skin and&nbsp;&nbsp;&nbspbecome&nbsp;&nbsp;its&nbsp;&nbsp;&nbspsecret agent.</p>
+    <p style="margin-left:20px">Click ~BOTH~ buttons below to send&nbsp;&nbsp;&nbsp;Saturn&nbsp;&nbsp;&nbsp;what you must&nbsp;&nbsp;and begin&nbsp;&nbsp;&nbsp;your&nbsp;&nbsp;&nbsp;transformation...</p>
+    <div>
+      <!--button class="capture-button">Capture Video</button-->
+      <form action="{{ url_for('handle_data') }}" method="post"  enctype=multipart/form-data>
+        <input style='display:none' type="text" name="demo" id="imagedata">
+        <button style="margin-left:20px; float:left" id="screenshot-button">Click to Take Screenshot</button>
+        <input style="margin-left:40px; display:inline" type="submit">
+      </form>
+    </div>
+    <video style="margin-left:20px" id='screenshot-video' autoplay></video>
+    <img id="screenshot-img">
+    <canvas style="display:none;"></canvas>
+  </div>
   <script>
     //const captureVideoButton = document.querySelector(".capture-button");
     const screenshotButton = document.querySelector("#screenshot-button");
