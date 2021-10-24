@@ -1,0 +1,42 @@
+html {
+  font-size: 10px;
+}
+
+h1 {
+  font-size: 5rem;
+  text-transform: capitalize;
+  color: white;
+  text-shadow: 1px 1px 1px #f7ff8c,
+               2px 2px 1px #f7ff8c;
+  text-align: center;
+  letter-spacing: 8px;
+}
+
+h2 {
+  font-size: 1.25rem;
+  color: white;
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  letter-spacing: 1px;
+}
+
+h1 + p {
+  font-weight: bold;
+}
+
+p {
+  font-size: 1.5rem;
+  color: white;
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  letter-spacing: 2px;
+}
+
+a {
+  color: #f7ff8c;
+}
+
+a.egg {
+  color: #white;
+  text-decoration: none;
+}

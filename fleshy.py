@@ -9,7 +9,6 @@ UPLOAD_FOLDER = '/pics'
 # creates a Flask application, named app
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
 # a route where we will display a welcome message via an HTML template
 @app.route("/")
 def hello():
@@ -18,7 +17,6 @@ def hello():
 @app.route('/handle_data', methods=['POST'])
 def handle_data():
     image_b64 = request.form['demo'].split(',')[1]
-    print(image_b64)
     image_data = base64.b64decode(image_b64)
     with open("test.png", "wb") as fo:
        fo.write(image_data)
